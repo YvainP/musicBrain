@@ -24,10 +24,12 @@ export default {
             errored: false,
             loading: true,
             dataBrute: null,
-            mediaURL: "https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2/",
+            mediaURL: "http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?inc=aliases&fmt=json",
         }
 
     },
+
+    props: ['city'],
 
     created(){
 

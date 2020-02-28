@@ -1,6 +1,7 @@
 <template>
   <div id="app">    
-    <h2 class="title">{{ keywords }}</h2>
+    <h2 class="title">Recherche</h2>
+    <media></media>
   </div>
 </template>
 
