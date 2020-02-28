@@ -8,6 +8,9 @@
     </div>
     <div v-else>
         {{ dataBrute }}
+        Name: {{ dataBrute.name }}
+        Musical genre: {{ dataBrute.disambiguation }}
+
     </div>
 </template>
 
@@ -24,12 +27,19 @@ export default {
             errored: false,
             loading: true,
             dataBrute: null,
-            mediaURL: "https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2/",
+            baseURL: "http://musicbrainz.org/ws/2",
+            typeMediaEntitie:"/artist",
+            options:"&fmt=json",
+            mediaURL: null,
+          //url exemple query http://musicbrainz.org/ws/2/recording/?query=annotation:Queen
         }
 
     },
 
     created(){
+        //On construit l'url avec les différentes parties, cette factorisation 
+        //de l'url permet de récupérer les informations voulue 
+        this.mediaURL = this.baseURL + this.typeMediaEntitie + this.idMediaEntitie + this.options;
 
         //Envoie une requête axios
         //Params: mediaURL=url de l'api
@@ -37,14 +47,14 @@ export default {
         axios
         .get(this.mediaURL)
         .then(response => {
-            this.dataBrute = response;
+            this.dataBrute = response.data;
         })
         //catch des erreurs
         .catch(error => {
             console.log(error);
             this.errored = true;
         })
-        //Affichage du spinner 
+        //Affichage du spinner si le temps de chargement est long 
         .finally( () => this.loading = false);
     }
 }

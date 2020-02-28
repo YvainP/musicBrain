@@ -26,7 +26,7 @@ export default {
       if(data.length < 1)
         return 0;
       else
-        this.keywords = data.split(" ");  
+        this.keywords = data.split(",");  
     }
   },
   created() {
