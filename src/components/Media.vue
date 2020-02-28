@@ -7,11 +7,7 @@
         <spinner></spinner>
     </div>
     <div v-else>
-        La météo à {{city}}<br>
-        Tendance actuelle: {{ infoBrute.weather[0].main }}<br>
-        Température: {{ infoBrute.main.temp }} C°<br>
-        Pression: {{ infoBrute.main.pressure }} hPa<br>
-        Humidité: {{ infoBrute.main.humidity }} %
+        {{ dataBrute }}
     </div>
 </template>
 
@@ -27,11 +23,8 @@ export default {
         return {
             errored: false,
             loading: true,
-            infoBrute: null,
-            apiKey: "&APPID=b25d36bbc9bc234b8d539449447a8e0b",
-            options: "&units=metric" + "&lang=fr",
-            baseURL: `http://api.openweathermap.org/data/2.5/weather?q=`,
-            weatherURL: null,
+            dataBrute: null,
+            mediaURL: "https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2/",
         }
 
     },
@@ -40,20 +33,20 @@ export default {
 
     created(){
 
-        // initialisation des variables
-        this.weatherURL = this.baseURL + this.city + this.apiKey + this.options;
-
-        //Requêtes des données météo
+        //Envoie une requête axios
+        //Params: mediaURL=url de l'api
+        //Return: response, tous les médias de l'api
         axios
-        .get(this.weatherURL)
+        .get(this.mediaURL)
         .then(response => {
-            this.infoBrute = response.data;
+            this.dataBrute = response;
         })
         //catch des erreurs
         .catch(error => {
             console.log(error);
             this.errored = true;
         })
+        //Affichage du spinner 
         .finally( () => this.loading = false);
     }
 }
