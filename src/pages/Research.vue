@@ -1,13 +1,10 @@
 <template>
-
   <div id="app">    
-    <h2 class="title">MusicdsqdsqdsqdqsdBrainZdsqdsqdz</h2>
+    <h2 class="title">{{ keywords }}</h2>
   </div>
-  
 </template>
 
 <script>
-
 import Media from '../components/Media.vue';
 
 
@@ -16,16 +13,33 @@ export default {
   components: { Media},
   data () {
     return {
+      keywords: null,
     }
-  }
+  },
+  methods : {
+    //Récupère les mot-clés envoyé par l'utilisateur
+    //params: none
+    //return: 0 si il n'y a pas de données, sinon renvoie un tableaux de mots
+    extractKeyWords() {
+      let data = this.$route.params.keywords;
+      if(data.length < 1)
+        return 0;
+      else
+        this.keywords = data.split(" ");  
+    }
+  },
+  created() {
+    // on récupère la chaîne de mot-clés à rechercher
+    this.extractKeyWords();
+  },
 }
 </script>
 
 <style scoped>
 
 .title {
+  margin-top: 10px;
   font-size: 25;
   text-align: center;
-  background-color: aliceblue
 }
 </style>
