@@ -33,7 +33,7 @@ export default {
     methods: {
       //Envoie une requête axios get
       //Params: mediaURL = url de la requête 
-      //Return: none si il n'y a pas de données, sinonrenvoie un tableau json 
+      //Return: Renvoie les résultats de la requête 
       makeAxiosRequest(mediaURL){
         return axios.get(mediaURL)
           .then(response => {
@@ -48,17 +48,20 @@ export default {
           .finally( () => this.loading = false);
       },
 
-      //Construit l'url d'une requete et récupère le résultat
-      //Params: keywords = mot-clés sur lesquels 
+      //Permet de rechercher dans l'api sur l'entité artiste 
+      //Params: keywords = mot-clés sur lesquels rechercher 
       //Return: Un tableau de données json
-      makingArtistURL(keywords){
+      getArtists(keywords){
         let artistURL = this.baseURL + "/artist/?query=" + keywords + this.options;
+
+        //On récupère le vueComponent nous intéresse
         let vueComponent = this;
+        //On récupère les données de la requête en deux temps
         this.makeAxiosRequest(artistURL).then(data => vueComponent.dataBrute = data);
       }
     },
     created(){
-      this.makingArtistURL("Queen")
+      this.getArtists("Queen")
 
     },
 }
