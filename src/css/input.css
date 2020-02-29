@@ -1,7 +1,7 @@
 
 .group { 
 	position:relative; 
-	margin-bottom:45px; 
+	margin-bottom:25px; 
 }
 input {
 	font-size:18px;
@@ -12,25 +12,6 @@ input {
 	border-bottom:1px solid #757575;
 	border-radius: 5px;
 	margin: auto;
-}
-
-
-label {
-	color:#999; 
-	font-size:18px;
-	position:absolute;
-	top:10px;
-	pointer-events: none;
-	transition:0.2s ease all; 
-	-moz-transition:0.2s ease all; 
-	-webkit-transition:0.2s ease all;
-	margin: 0;
-}
-
-input:focus ~ label, input:valid ~ label {
-	top:-20px;
-	font-size:14px;
-	color:black;
 }
 
 .bar { 

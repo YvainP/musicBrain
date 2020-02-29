@@ -8,18 +8,19 @@
     </p>
     <p class="subTitle">Give it a try with the field below :)</p>
 
-    <div class="group">      
-      <input type="text" v-model="inputWords" required>
+    <form class="group">
+      <input type="text" placeholder="Enter any keywords" required/>
       <span class="bar"></span>
-      <label >Any keywords in here</label>
-    </div>
-
-    <!-- On lie la page de recherche au "bouton" en lui passant 
+      <!-- On lie la page de recherche au "bouton" en lui passant 
       comme paramètres ce que l'user a tapé dans la barre -->
-    <router-link :to="{ name: 'research', params: { keywords: inputWords } }" 
-      class="btn btn-dark">
-      Let's search it!
-    </router-link>
+      <router-link :to="{ name: 'research', params: { keywords: inputWords } }">
+        <button class="btn btn-dark">
+          Let's search it!
+        </button>
+      </router-link>
+    </form>
+
+
   </div>
   
 </template>
