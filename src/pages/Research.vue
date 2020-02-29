@@ -1,17 +1,16 @@
 <template>
   <div id="app">    
     <h2 class="title">Recherche</h2>
-    <media></media>
+    <mediaList></mediaList>
   </div>
 </template>
 
 <script>
-import Media from '../components/Media.vue';
-
+import mediaList from '../components/MediaList.vue';
 
 export default {
   name: 'app',
-  components: { Media},
+  components: { mediaList },
   data () {
     return {
       keywords: null,
