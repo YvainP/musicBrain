@@ -7,18 +7,23 @@
         <spinner></spinner>
     </div>
     <div v-else>
-        {{ dataBrute }}
+      <ul>
+        <li v-for="item in dataBrute">
+          <media :mediaData=item ></media>
+        </li>
+      </ul>
     </div>
 </template>
 
 <script>
 
+import Media from './Media.vue';
 import Spinner from './Spinner.vue';
-import axios from "axios";
+import axios from 'axios';
 
 export default {
     name: 'app',
-    components: {Spinner},
+    components: { Spinner, Media },
     data() {
         return {
           errored: false,
@@ -53,11 +58,11 @@ export default {
       //Return: Un tableau de données json
       getArtists(keywords){
         let artistURL = this.baseURL + "/artist/?query=" + keywords + this.options;
-
+        console.log(artistURL);
         //On récupère le vueComponent nous intéresse
         let vueComponent = this;
         //On récupère les données de la requête en deux temps
-        this.makeAxiosRequest(artistURL).then(data => vueComponent.dataBrute = data);
+        this.makeAxiosRequest(artistURL).then(data => vueComponent.dataBrute = data.artists);
       }
     },
     created(){

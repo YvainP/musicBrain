@@ -1,4 +1,10 @@
 <template>
+  <div>
+    {{ mediaData.type }} 
+    {{ mediaData.name }} 
+    {{ mediaData.area.name }}
+    {{ mediaData.disambiguation }}
+  </div>
 </template>
 
 <script>
@@ -6,7 +12,7 @@
 
 export default {
     name: 'app',
-    components: {},
+    props: ['mediaData'],
     data() {
         return {
         }
