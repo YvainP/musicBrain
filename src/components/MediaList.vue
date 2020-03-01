@@ -7,11 +7,19 @@
         <spinner></spinner>
     </div>
     <div v-else>
-      <ul>
-        <li v-for="item in dataBrute">
-          <media :mediaData="item" ></media>
-        </li>
-      </ul>
+      <div v-if="dataBrute !== null"> 
+        <ul>
+          <li v-if="dataBrute[0] !== null" v-for="item in dataBrute[0].artists">
+            <media :mediaData="item" typeMedia="artist"></media>
+          </li>
+          <li v-if="dataBrute[1] !== null" v-for="item in dataBrute[1].recordings">
+            <media :mediaData="item" typeMedia="recording"></media>
+          </li>
+        </ul>
+      </div>
+      <div v-else>
+        Sorry but your research didn't return anything :(
+      </div>
     </div>
 </template>
 
@@ -28,7 +36,7 @@ export default {
         return {
           errored: false,
           loading: true,
-          dataBrute: null,
+          dataBrute: [],
           baseURL: "http://musicbrainz.org/ws/2",
           options:"&fmt=json&limit=4",
         }
@@ -57,22 +65,18 @@ export default {
       //Return: Un tableau de données json
       getArtists(keywords){
         let URL = this.baseURL + "/artist/?query=" + keywords + this.options;
-        console.log(URL);
         //On récupère le vueComponent nous intéresse
         let vueComponent = this;
         //On récupère les données de la requête en deux temps
-        this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute = data.artists);
+        this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute.push(data));
       },
       //Permet de rechercher dans l'api sur l'entité recording 
       //Params: keywords = mot-clés sur lesquels rechercher 
       //Return: Un tableau de données json
       getRecordings(keywords){
         let URL = this.baseURL + "/recording/?query=" + keywords + this.options;
-        console.log(URL);
-        //On récupère le vueComponent nous intéresse
         let vueComponent = this;
-        //On récupère les données de la requête en deux temps
-        this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute = vueComponent.dataBrute + data.recordings);
+        this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute.push(data));
       }
 
     },
