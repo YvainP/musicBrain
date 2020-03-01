@@ -9,7 +9,7 @@
     <div v-else>
       <ul>
         <li v-for="item in dataBrute">
-          <media :mediaData=item ></media>
+          <media :mediaData="item" ></media>
         </li>
       </ul>
     </div>
@@ -30,8 +30,7 @@ export default {
           loading: true,
           dataBrute: null,
           baseURL: "http://musicbrainz.org/ws/2",
-          options:"&fmt=json",
-          //url exemple query http://musicbrainz.org/ws/2/recording/?query=annotation:Queen
+          options:"&fmt=json&limit=4",
         }
 
     },
@@ -57,17 +56,29 @@ export default {
       //Params: keywords = mot-clés sur lesquels rechercher 
       //Return: Un tableau de données json
       getArtists(keywords){
-        let artistURL = this.baseURL + "/artist/?query=" + keywords + this.options;
-        console.log(artistURL);
+        let URL = this.baseURL + "/artist/?query=" + keywords + this.options;
+        console.log(URL);
         //On récupère le vueComponent nous intéresse
         let vueComponent = this;
         //On récupère les données de la requête en deux temps
-        this.makeAxiosRequest(artistURL).then(data => vueComponent.dataBrute = data.artists);
+        this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute = data.artists);
+      },
+      //Permet de rechercher dans l'api sur l'entité recording 
+      //Params: keywords = mot-clés sur lesquels rechercher 
+      //Return: Un tableau de données json
+      getRecordings(keywords){
+        let URL = this.baseURL + "/recording/?query=" + keywords + this.options;
+        console.log(URL);
+        //On récupère le vueComponent nous intéresse
+        let vueComponent = this;
+        //On récupère les données de la requête en deux temps
+        this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute = vueComponent.dataBrute + data.recordings);
       }
+
     },
     created(){
-      this.getArtists("Queen")
-
+      this.getArtists("Queen"),
+      this.getRecordings("Queen")
     },
 }
 

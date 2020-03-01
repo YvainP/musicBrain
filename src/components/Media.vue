@@ -12,7 +12,7 @@
 
 export default {
     name: 'app',
-    props: ['mediaData'],
+    props: ['mediaData', 'typeMedia'],
     data() {
         return {
         }
