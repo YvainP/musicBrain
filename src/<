@@ -7,20 +7,16 @@
         <spinner></spinner>
     </div>
     <div v-else>
-      <!-- on vérifie que l'on a des données à traiter -->
+      <!-- si on récupère des données -->
       <div v-if="dataBrute !== null"> 
         <ul>
-          <!-- on parcoure le tableau 2D d'entités -->
-          <div v-for="datas in dataBrute">
-            <!-- Pour chaque tableau d'une entité, on appelle le component
-              média qui les traitera -->
-            <li v-if="datas.artists" v-for="artist in datas.artists">
-              <media :mediaData="artist" typeMedia="artist"></media>
-            </li>
-            <li v-if="datas.recordings" v-for="record in datas.recordings">
-              <media :mediaData="record" typeMedia="recording"></media>
-            </li>
-          </div>
+          <!-- on appelle le component média pour chaque type de média non vide -->
+          <li v-if="dataBrute[0] !== null" v-for="item in dataBrute[0].artists">
+            <media :mediaData="item" typeMedia="artist"></media>
+          </li>
+          <li v-if="dataBrute[1] !== null" v-for="item in dataBrute[1].recordings">
+            <media :mediaData="item" typeMedia="recording"></media>
+          </li>
         </ul>
       </div>
       <div v-else>
@@ -43,7 +39,6 @@ export default {
           errored: false,
           loading: true,
           dataBrute: [],
-          index: 0,
           baseURL: "http://musicbrainz.org/ws/2",
           options:"&fmt=json&limit=4",
         }
@@ -74,7 +69,7 @@ export default {
         let URL = this.baseURL + "/artist/?query=" + keywords + this.options;
         //On récupère le vueComponent nous intéresse
         let vueComponent = this;
-        //On envoie le tableau d'artistes dans un tableau
+        //On récupère les données de la requête en deux temps
         this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute.push(data));
       },
       //Permet de rechercher dans l'api sur l'entité recording 

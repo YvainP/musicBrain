@@ -1,15 +1,15 @@
 <template>
+  <!-- En fonction du média on récupère les champs intéressants-->
   <div v-if="typeMedia == 'artist'">
     {{ mediaData.type }} 
-    {{ mediaData.name }} 
-    {{ mediaData.area.name }}
-    {{ mediaData.disambiguation }}
+    Name: {{ mediaData.name }} 
+    Country: {{ mediaData.area.name }}
+    Musical genre: {{ mediaData.disambiguation }}
   </div>
   <div v-else-if="typeMedia == 'recording'">
-    {{ mediaData.title }}
-  </div>
-  <div v-else>
-    wtf?
+    Song name: {{ mediaData.title }}
+    Name of the artist: {{ mediaData["artist-credit"][0].name }}
+    Musical genre: 
   </div>
 </template>
 
