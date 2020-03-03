@@ -1,17 +1,20 @@
 <template>
+  <div>
+      <input v-model="keywordsEntered" placeholder="You can search anything here :)"
+        v-on:keyup="getTypedWords(keywordsEntered)">
     <div v-if="errored">       
-        An error has been encountered
+      An error has been encountered
     </div>
     <div v-else-if="loading">       
-        Loading the data
-        <spinner></spinner>
+      Loading the data
+      <spinner></spinner>
     </div>
     <div v-else>
       <!-- on vérifie que l'on a des données à traiter -->
       <div v-if="dataBrute !== null"> 
-        <ul class="list-group mine w-3 m-3">
+        <ul id="listOfMedias" class="list-group mine w-3 m-3">
           <!-- on parcoure le tableau 2D d'entités -->
-          <div v-for="datas in dataBrute" v-bind:key="datas">
+          <div v-for="datas in dataBrute">
             <!-- Pour chaque tableau d'une entité, on appelle le component
               média qui les traitera -->
             <li v-for="artist in datas.artists">
@@ -29,6 +32,7 @@
         Sorry but your research didn't return anything :(
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -40,12 +44,13 @@ import axios from 'axios';
 export default {
     name: 'app',
     components: { Spinner, Media },
+    props: ["firstSearch"],
     data() {
         return {
           errored: false,
           loading: true,
           dataBrute: [],
-          index: 0,
+          keywordsEntered: null,
           baseURL: "http://musicbrainz.org/ws/2",
           options:"&fmt=json&limit=4",
         }
@@ -86,12 +91,25 @@ export default {
         let URL = this.baseURL + "/recording/?query=" + keywords + this.options;
         let vueComponent = this;
         this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute.push(data));
-      }
+      },
+
+      //Récupère les
+      getTypedWords(keywords){
+        let toSearch = keywords;
+        if(toSearch.length > 1){
+          let root = document.getElementById("listOfMedias");
+          while(root.firstChild ){
+            root.removeChild(root.firstChild );
+          }
+          this.getArtists(toSearch);
+          this.getRecordings(toSearch);
+        }
+      },
 
     },
     created(){
-      this.getArtists("Queen"),
-      this.getRecordings("Queen")
+      this.getArtists(this.firstSearch),
+      this.getRecordings(this.firstSearch)
     },
 }
 
