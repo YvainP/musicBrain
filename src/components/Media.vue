@@ -1,7 +1,9 @@
 <template>
   <!-- En fonction du média on récupère les champs intéressants-->
   <div v-if="typeMedia == 'artist'">
-    {{ mediaData.type }} 
+    <div v-if="mediaData.name == 'Group'">
+      <i class="fas fa-music"></i>
+    </div>
     Name: {{ mediaData.name }} 
     Country: {{ mediaData.area.name }}
     Musical genre: {{ mediaData.disambiguation }}
@@ -12,7 +14,6 @@
     Musical genre: 
   </div>
 </template>
-
 <script>
 
 
@@ -22,7 +23,6 @@ export default {
     data() {
         return {
         }
-
     },
 }
 

@@ -9,16 +9,18 @@
     <div v-else>
       <!-- on vérifie que l'on a des données à traiter -->
       <div v-if="dataBrute !== null"> 
-        <ul>
+        <ul class="list-group mine w-3 m-3">
           <!-- on parcoure le tableau 2D d'entités -->
-          <div v-for="datas in dataBrute">
+          <div v-for="datas in dataBrute" v-bind:key="datas">
             <!-- Pour chaque tableau d'une entité, on appelle le component
               média qui les traitera -->
-            <li v-if="datas.artists" v-for="artist in datas.artists">
-              <media :mediaData="artist" typeMedia="artist"></media>
+            <li v-for="artist in datas.artists">
+              <media :mediaData="artist" typeMedia="artist" 
+                class="list-group-item mb-3"></media>
             </li>
-            <li v-if="datas.recordings" v-for="record in datas.recordings">
-              <media :mediaData="record" typeMedia="recording"></media>
+            <li v-for="record in datas.recordings">
+              <media :mediaData="record" typeMedia="recording"
+                class="list-group-item mb-3"></media>
             </li>
           </div>
         </ul>
@@ -95,3 +97,11 @@ export default {
 
 </script>
 
+<style scoped>
+.mine {
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  list-style-type: none;
+}
+</style>
