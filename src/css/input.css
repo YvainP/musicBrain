@@ -7,7 +7,7 @@ input {
 	font-size:18px;
 	padding:10px 10px 10px 5px;
 	display:block;
-	width:300px;
+	width:30%;
 	border:none;
 	border-bottom:1px solid #757575;
 	border-radius: 5px;
@@ -17,7 +17,7 @@ input {
 .bar { 
 	position:relative; 
 	display:block; 
-	width:300px; 
+	width:30%; 
 	margin: auto;
 }
 .bar:before, .bar:after 	{

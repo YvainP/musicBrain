@@ -7,9 +7,9 @@
       {{ mediaData.type }} 
       Name: {{ mediaData.name }} 
       Country: <!--{{ mediaData.area.name }}-->
-      <div v-if="mediaData.disambiguation">
+      <i v-if="mediaData.disambiguation.length > 0">
         Musical genre: {{ mediaData.disambiguation }}
-      </div>
+      </i>
     </div>
     <!-- Gère le cas d'une musique -->
     <div v-else-if="typeMedia == 'recording'">

@@ -1,8 +1,9 @@
 <!-- Liste des médias -->
 <template>
   <div>
-    <input v-model="keywordsEntered" placeholder="You can search anything here :)" 
+    <input class="mainInput" v-model="keywordsEntered" placeholder="You can search anything here :)" 
       @keyup="searchTimeOut(keywordsEntered)" type="text" />
+    <span class="bar"></span>
     <!-- S'il y a des erreurs, on envoie leurs valeurs au component -->
     <div v-if="error !== null">   
       <unwanted :typeUnwanted="error"></unwanted>
@@ -42,7 +43,7 @@
 import Media from './Media.vue';
 import Unwanted from './Unwanted.vue';
 import axios from 'axios';
-import styles from "../css/cssForList.css";
+import styles from "../css/cssResearch.css";
 
 export default {
     name: 'app',
@@ -95,10 +96,11 @@ export default {
       //Params: keywords = mot-clés à rechercher 
       //Return: none, il y a un affichage dynamique
       getTypedWords(keywords){
-        //Les espaces sont remplacés par %20 pour la requête
-        //ceux avant et après la chaîne sont supprimés
-        let toSearch = (keywords.trim()).replace(" ", "%20");
-          if(keywords){
+          //check s'il y a quelque chose à traiter
+          if(keywords.length > 0){
+            //Les espaces sont remplacés par %20 pour la requête
+            //ceux avant et après la chaîne sont supprimés
+            let toSearch = (keywords.trim()).replace(" ", "%20");
             //On vide la liste au préalable
             let root = document.getElementById("listOfMedias");
             while(root.firstChild ){root.removeChild(root.firstChild );}

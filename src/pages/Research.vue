@@ -1,7 +1,7 @@
 <!-- Page de recherche de l'application -->
 <template>
   <div id="app">    
-    <h2 class="title">Recherche</h2>
+    <h2 class="mainTitle">Recherche</h2>
     <mediaList :firstSearch="firstSearch"></mediaList>
   </div>
 </template>
