@@ -8,7 +8,9 @@
     <!-- Cas d'une erreur-->
     <div v-else-if="typeUnwanted !== null">
       An error has been encountered, please reload the page (press F5)
-      <br>If you're concerned about the error, here it is: {{ typeUnwanted }}
+      <!-- Moins d'erreurs est le meilleur -Canals 2020
+	<br>If you're concerned about the error, here it is: {{ typeUnwanted }}
+	-->
     </div>
   </div>
 </template>
