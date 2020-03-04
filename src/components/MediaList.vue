@@ -1,7 +1,7 @@
 <template>
   <div>
-      <input v-model="keywordsEntered" placeholder="You can search anything here :)"
-        v-on:keyup="getTypedWords(keywordsEntered)">
+    <input v-model="keywordsEntered" placeholder="You can search anything here :)" 
+      @keyup="searchTimeOut(keywordsEntered)" type="text" />
     <div v-if="errored">       
       An error has been encountered
     </div>
@@ -40,6 +40,8 @@
 import Media from './Media.vue';
 import Spinner from './Spinner.vue';
 import axios from 'axios';
+import styles from "../css/cssForList.css";
+import vueDebounce from 'vue-debounce';
 
 export default {
     name: 'app',
@@ -93,33 +95,47 @@ export default {
         this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute.push(data));
       },
 
-      //Récupère les
+      //Récupère les mot-clés tapés dans la barre de recherche
+      //Params: keywords = mot-clés à rechercher 
+      //Return: none, il y a un affichage dynamique
       getTypedWords(keywords){
         let toSearch = keywords;
-        if(toSearch.length > 1){
-          let root = document.getElementById("listOfMedias");
-          while(root.firstChild ){
-            root.removeChild(root.firstChild );
-          }
-          this.getArtists(toSearch);
-          this.getRecordings(toSearch);
+        //On vide la liste au préalable
+        let root = document.getElementById("listOfMedias");
+        while(root.firstChild ){
+          root.removeChild(root.firstChild );
         }
+        //On effectue les requêtes 
+        this.getArtists(toSearch);
+        this.getRecordings(toSearch);
       },
+      //Capte le moment ou l'utilisateur a probablement finis d'écrire
+      //permet d'éviter trop de requêtes vers l'api
+      //Params: keywords = mot-clés à rechercher que l'on transfert
+      //Return: none
+      searchTimeOut(typedWords) {  
+          if (this.timer) {
+              clearTimeout(this.timer);
+              this.timer = null;
+          }
+          this.timer = setTimeout(() => {
+            this.getTypedWords(typedWords);
+          }, 800);
+      }
 
     },
+    //Si la premiere recherche est null ou undefined on assigne
+    //Queen comme valeur par défaut puisque Queen c'est bien :)
     created(){
-      this.getArtists(this.firstSearch),
-      this.getRecordings(this.firstSearch)
+      if((this.firstSearch == undefined) || (this.firstSearch == null)){
+        this.getArtists("Queen");
+        this.getRecordings("Queen");
+      //sinon on requête sur la première recherche
+      } else {
+        this.getArtists(this.firstSearch);
+        this.getRecordings(this.firstSearch);
+      }
     },
 }
 
 </script>
-
-<style scoped>
-.mine {
-  padding: 10px;
-  background-color: white;
-  border-radius: 8px;
-  list-style-type: none;
-}
-</style>
