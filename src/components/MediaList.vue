@@ -1,13 +1,15 @@
+<!-- Liste des médias -->
 <template>
   <div>
     <input v-model="keywordsEntered" placeholder="You can search anything here :)" 
       @keyup="searchTimeOut(keywordsEntered)" type="text" />
-    <div v-if="errored">       
-      An error has been encountered
+    <!-- S'il y a des erreurs, on envoie leurs valeurs au component -->
+    <div v-if="error !== null">   
+      <unwanted :typeUnwanted="error"></unwanted>
     </div>
+    <!-- S'il les données sont longues à charger -->
     <div v-else-if="loading">       
-      Loading the data
-      <spinner></spinner>
+      <unwanted :typeUnwanted="'loading'"></unwanted>
     </div>
     <div v-else>
       <!-- on vérifie que l'on a des données à traiter -->
@@ -38,18 +40,17 @@
 <script>
 
 import Media from './Media.vue';
-import Spinner from './Spinner.vue';
+import Unwanted from './Unwanted.vue';
 import axios from 'axios';
 import styles from "../css/cssForList.css";
-import vueDebounce from 'vue-debounce';
 
 export default {
     name: 'app',
-    components: { Spinner, Media },
+    components: {Media, Unwanted },
     props: ["firstSearch"],
     data() {
         return {
-          errored: false,
+          error: null,
           loading: true,
           dataBrute: [],
           keywordsEntered: null,
@@ -64,14 +65,9 @@ export default {
       //Return: Renvoie les résultats de la requête 
       makeAxiosRequest(mediaURL){
         return axios.get(mediaURL)
-          .then(response => {
-            return response.data;
-          })
+          .then(response => {return response.data;})
           //catch des erreurs
-          .catch(error => {
-            console.log(error);
-            this.errored = true;
-          })
+          .catch(error => {this.error = error; })
           //Affichage du spinner si le temps de chargement est long 
           .finally( () => this.loading = false);
       },
@@ -99,19 +95,21 @@ export default {
       //Params: keywords = mot-clés à rechercher 
       //Return: none, il y a un affichage dynamique
       getTypedWords(keywords){
-        let toSearch = keywords;
-        //On vide la liste au préalable
-        let root = document.getElementById("listOfMedias");
-        while(root.firstChild ){
-          root.removeChild(root.firstChild );
-        }
-        //On effectue les requêtes 
-        this.getArtists(toSearch);
-        this.getRecordings(toSearch);
+        //Les espaces sont remplacés par %20 pour la requête
+        //ceux avant et après la chaîne sont supprimés
+        let toSearch = (keywords.trim()).replace(" ", "%20");
+          if(keywords){
+            //On vide la liste au préalable
+            let root = document.getElementById("listOfMedias");
+            while(root.firstChild ){root.removeChild(root.firstChild );}
+            //On effectue les requêtes 
+            this.getArtists(toSearch);
+            this.getRecordings(toSearch);
+          }
       },
       //Capte le moment ou l'utilisateur a probablement finis d'écrire
       //permet d'éviter trop de requêtes vers l'api
-      //Params: keywords = mot-clés à rechercher que l'on transfert
+      //Params: typedWords = recherche que l'on transfert
       //Return: none
       searchTimeOut(typedWords) {  
           if (this.timer) {

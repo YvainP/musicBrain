@@ -1,3 +1,4 @@
+<!-- Component spinner affiché quand les données sont longues à charger -->
 <template>
     <div class="spinner"></div>
 </template>

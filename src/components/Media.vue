@@ -1,3 +1,4 @@
+<!-- Component média, utilisé pour récupérer les infos d'un média -->
 <template>
   <div>
     <!-- En fonction du média on récupère les champs intéressants
