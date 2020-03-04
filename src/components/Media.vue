@@ -8,11 +8,12 @@
       Name: {{ mediaData.name }} 
       Country: <!--{{ mediaData.area.name }}-->
       <i v-if="mediaData.disambiguation.length > 0">
-        Musical genre: {{ mediaData.disambiguation }}
+        Musical genre: 
       </i>
     </div>
     <!-- Gère le cas d'une musique -->
     <div v-else-if="typeMedia == 'recording'">
+      {{mediaData}}
       Song name: {{ mediaData.title }}
       by {{ mediaData["artist-credit"][0].name }}
       Musical genre: 
