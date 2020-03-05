@@ -1,6 +1,9 @@
 <!-- Liste des médias -->
 <template>
   <div>
+    <button @click="showModal = true">Show Modal</button>
+    <modal v-if="showModal">
+    </modal>
     <input class="mainInput" v-model="keywordsEntered" placeholder="You can search anything here :)" 
       @keyup="searchTimeOut(keywordsEntered)" type="text" />
     <span class="bar"></span>
@@ -42,12 +45,13 @@
 
 import Media from './Media.vue';
 import Unwanted from './Unwanted.vue';
+import Modal from './Modal.vue';
 import axios from 'axios';
 import styles from "../css/cssResearch.css";
 
 export default {
     name: 'app',
-    components: {Media, Unwanted },
+    components: {Media, Unwanted, Modal },
     props: ["firstSearch"],
     data() {
         return {
@@ -57,6 +61,7 @@ export default {
           keywordsEntered: null,
           baseURL: "http://musicbrainz.org/ws/2",
           options:"&fmt=json&limit=4",
+          showModal: false,
         }
 
     },
@@ -121,8 +126,7 @@ export default {
           this.timer = setTimeout(() => {
             this.getTypedWords(typedWords);
           }, 800);
-      }
-
+      },
     },
     //Si la premiere recherche est null ou undefined on assigne
     //Queen comme valeur par défaut puisque Queen c'est bien :)
