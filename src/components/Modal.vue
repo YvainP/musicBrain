@@ -8,26 +8,28 @@
         <!-- utilisé pour fermer le modal -->
         <span class="close" @click="$emit('close')">&times;</span>
         <!-- traitement et affichage des données-->
-        <p>{{detailMedia.type}}</p>
-        {{detailMedia.name}}
-        {{detailMedia}}
-        <!-- En fonction du média on récupère les champs intéressants
-        On gère le cas des artistes -->
+        <!-- On gère le cas des artistes -->
         <div v-if="typeMedia == 'artist'">
           <!-- on affiche le type d'artiste si on le connaît-->
           <i v-if="detailMedia.type">
             <img v-if="detailMedia.type=='Group'" src="../css/img/band.png">
             <img v-if="detailMedia.type=='Person'" src="../css/img/musician.png">
             <img v-if="detailMedia.type=='Character'" src="../css/img/theater.svg" width="32px" height="32px">
-            type media:{{ detailMedia.type }} 
+            <p>Artist type : {{detailMedia.type}}</p>
+            <p>{{detailMedia.type}} name: {{detailMedia.name}}</p>
+            <p>Location: {{detailMedia.area.name}}</p>
           </i>
-          {{ mediaData.name }} 
-          Country: <!--{{ mediaData.area.name }}-->
+        </div>
+        <!-- On gère le cas d'un record -->
+        <div v-else-if="typeMedia == 'recording'">
+          <img src="../css/img/music.png">
+          <p>song name: {{detailMedia.title}}</p>
+          <p>by {{ detailMedia["artist-credit"][0].name}}</p>
+          {{detailMedia}}
         </div>
       </div>
     </div>
   </div>
-
 </template>
 <script>
 

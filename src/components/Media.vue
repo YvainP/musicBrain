@@ -11,16 +11,19 @@
           <img v-if="mediaData.type=='Group'" src="../css/img/band.png">
           <img v-if="mediaData.type=='Person'" src="../css/img/musician.png">
           <img v-if="mediaData.type=='Character'" src="../css/img/theater.svg" width="32px" height="32px">
-          type media:{{ mediaData.type }} 
+          <img v-if="mediaData.type=='Orchestra'" src="../css/img/orchestra.jpg" >
+          <img v-if="mediaData.type=='Choir'" src="../css/img/choir.png"> 
+          <img v-if="mediaData.type=='Other'" src="../css/img/unknown.png"> 
+          artist type: {{ mediaData.type }} 
         </i>
         {{ mediaData.name }} 
-        Country: <!--{{ mediaData.area.name }}-->
+        <i v-if="mediaData.area">Country: {{ mediaData.area.name }}</i>
       </div>
       <!-- Gère le cas d'une musique -->
       <div v-else-if="typeMedia == 'recording'">
         <img src="../css/img/music.png">
-        Song name: {{ mediaData.title }}
-        by {{ mediaData["artist-credit"][0].name }}
+        Song : <b>{{ mediaData.title }}</b>
+        by <i>{{ mediaData["artist-credit"][0].name }}</i>
       </div>
     </div>
   </div>

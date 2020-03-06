@@ -57,7 +57,7 @@ export default {
           dataBrute: [],
           keywordsEntered: null,
           baseURL: "http://musicbrainz.org/ws/2",
-          options:"&fmt=json&limit=4",
+          options:"&fmt=json&limit=5",
         }
 
     },
