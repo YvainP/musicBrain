@@ -7,7 +7,7 @@
 
 import styles from '../css/spinner.css';
 export default {
-  name: 'app',
+  name: 'spinner',
 
   data () {
     return {

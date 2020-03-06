@@ -9,7 +9,8 @@
     <p class="subTitle">Give it a try with the field below :)</p>
 
     <form class="group">
-      <input type="text" placeholder="Enter any keywords" v-model="inputWords" required/>
+      <input ref="search" id="inputSearch" type="text" placeholder="Enter any keywords" 
+        v-model="inputWords" autofocus/>
       <span class="bar"></span>
       <!-- On lie la page de recherche au "bouton" en lui passant 
       comme paramètres ce que l'user a tapé dans la barre -->
@@ -19,21 +20,21 @@
         </button>
       </router-link>
     </form>
-
-
   </div>
-  
 </template>
 
 <script>
 import styles from "../css/accueil.css";
 
 export default {
-  name: 'app',
+  name: 'home',
   data() {
     return {
       inputWords: null,
     }
   },
+  created() {
+    this.$refs.search.$el.focus();
+  }
 }
 </script>

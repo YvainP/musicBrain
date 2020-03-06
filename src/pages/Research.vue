@@ -1,7 +1,7 @@
 <!-- Page de recherche de l'application -->
 <template>
   <div id="app">    
-    <h2 class="mainTitle">Recherche</h2>
+    <h2 class="mainTitle">Research</h2>
     <mediaList :firstSearch="firstSearch"></mediaList>
   </div>
 </template>
@@ -10,7 +10,7 @@
 import mediaList from '../components/MediaList.vue';
 
 export default {
-  name: 'app',
+  name: 'research',
   components: { mediaList },
   data () {
     return {

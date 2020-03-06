@@ -1,12 +1,14 @@
-<!-- Component unwanted, les non désirés c'est à dire les chargement long ou les erreurs-->
+<!-- Component modal, affiche les détails d'un média -->
 <template>
   <div>
-  <!-- The Modal -->
-  <div id="myModal" class="Modal">
+  <!-- Le modal -->
+  <div id="detailModal" class="Modal">
     <!-- Modal content -->
     <div class="modal-content">
-        <span class="close" >&times;</span>
-        <p>Some text in the Modal..</p>
+      <!-- utilisé pour fermer le modal -->
+        <span class="close" @click="$emit('close')">&times;</span>
+        <!-- traitement et affichage des données-->
+        <p>{{detailMedia}}</p>
       </div>
     </div>
   </div>
@@ -16,12 +18,15 @@
 import styles from '../css/modal.css';
 
 export default {
-  name: 'app',
-  props: ['mediaData', 'typeMedia'],
-  methods: {
-    closeModal(){
-      document.getElementByID("Modal").display = "none";
+  name: 'modal',
+  props: ['detailMedia', 'typeMedia'],
+  data() {
+    return{
+      status: true,
     }
+  },
+  methods: {
+
   },
 }
 </script>

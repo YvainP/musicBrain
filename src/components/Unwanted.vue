@@ -19,7 +19,7 @@
 import Spinner from './Spinner.vue';
 
 export default {
-    name: 'app',
+    name: 'unwanted',
     props: ['typeUnwanted'],
     components: {Spinner},
 }

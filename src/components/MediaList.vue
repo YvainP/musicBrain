@@ -1,9 +1,7 @@
 <!-- Liste des médias -->
 <template>
-  <div>
-    <button @click="showModal = true">Show Modal</button>
-    <modal v-if="showModal">
-    </modal>
+  <div class=""> 
+    <!-- barre de recherche --> 
     <input class="mainInput" v-model="keywordsEntered" placeholder="You can search anything here :)" 
       @keyup="searchTimeOut(keywordsEntered)" type="text" />
     <span class="bar"></span>
@@ -18,9 +16,9 @@
     <div v-else>
       <!-- on vérifie que l'on a des données à traiter -->
       <div v-if="dataBrute !== null"> 
-        <ul id="listOfMedias" class="list-group mine w-3 m-3">
+        <ul id="listOfMedias" class="list-group mine w-3 m-3" >
           <!-- on parcoure le tableau 2D d'entités -->
-          <div v-for="datas in dataBrute">
+          <div v-for="datas in dataBrute" >
             <!-- Pour chaque tableau d'une entité, on appelle le component
               média qui les traitera -->
             <li v-for="artist in datas.artists">
@@ -45,13 +43,12 @@
 
 import Media from './Media.vue';
 import Unwanted from './Unwanted.vue';
-import Modal from './Modal.vue';
 import axios from 'axios';
 import styles from "../css/cssResearch.css";
 
 export default {
-    name: 'app',
-    components: {Media, Unwanted, Modal },
+    name: 'mediaList',
+    components: {Media, Unwanted  },
     props: ["firstSearch"],
     data() {
         return {
@@ -61,7 +58,6 @@ export default {
           keywordsEntered: null,
           baseURL: "http://musicbrainz.org/ws/2",
           options:"&fmt=json&limit=4",
-          showModal: false,
         }
 
     },
