@@ -1,7 +1,7 @@
-omponent média, utilisé pour récupérer les infos d'un média -->
+<!-- component média, utilisé pour afficher les infos d'un média -->
 <template>
   <div>
-    <modal v-if="showModal" v-on:close="closeModal" :detailMedia="mediaData"></modal>
+    <modal v-if="showModal" v-on:close="closeModal" :detailMedia="mediaData" :typeMedia="typeMedia"></modal>
       <div @click="showModal=true">
       <!-- En fonction du média on récupère les champs intéressants
       On gère le cas des artistes -->
