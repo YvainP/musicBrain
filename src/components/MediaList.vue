@@ -29,6 +29,11 @@
               <media :mediaData="record" typeMedia="recording"
                 class="list-group-item mb-3"></media>
             </li>
+             <li v-for="release in datas.releases">
+               {{release}}
+              <media :mediaData="release" typeMedia="release"
+                class="list-group-item mb-3"></media>
+            </li>
           </div>
         </ul>
       </div>
@@ -74,22 +79,14 @@ export default {
           .finally( () => this.loading = false);
       },
 
-      //Permet de rechercher dans l'api sur l'entité artiste 
-      //Params: keywords = mot-clés sur lesquels rechercher 
+      //Permet de rechercher dans l'api sur l'entité  
+      //Params: entity: type de média voulu, keywords = mot-clés à rechercher 
       //Return: Un tableau de données json
-      getArtists(keywords){
-        let URL = this.baseURL + "/artist/?query=" + keywords + this.options;
+      getEntityData(entity, keywords){
+        let URL = this.baseURL + "/" + entity + "/?query=" + keywords + this.options;
         //On récupère le vueComponent nous intéresse
         let vueComponent = this;
-        //On envoie le tableau d'artistes dans un tableau
-        this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute.push(data));
-      },
-      //Permet de rechercher dans l'api sur l'entité recording 
-      //Params: keywords = mot-clés sur lesquels rechercher 
-      //Return: Un tableau de données json
-      getRecordings(keywords){
-        let URL = this.baseURL + "/recording/?query=" + keywords + this.options;
-        let vueComponent = this;
+        //On envoie le tableau d'artistes dans le tableau dataBrute de cette vue
         this.makeAxiosRequest(URL).then(data => vueComponent.dataBrute.push(data));
       },
 
@@ -106,8 +103,7 @@ export default {
             let root = document.getElementById("listOfMedias");
             while(root.firstChild ){root.removeChild(root.firstChild );}
             //On effectue les requêtes 
-            this.getArtists(toSearch);
-            this.getRecordings(toSearch);
+            this.launchRequests(toSearch);
           }
       },
       //Capte le moment ou l'utilisateur a probablement finis d'écrire
@@ -123,17 +119,25 @@ export default {
             this.getTypedWords(typedWords);
           }, 800);
       },
+
+      //Appel des fonctions de requête sur les médias qui nous intéressent
+      //Params toSearch: la recherche à passer à l'api musicbrain
+      //return none
+      launchRequests(toSearch){
+        const entities = ['artist', 'release', 'recording'];
+        for(let i = 0; i < entities.length; i++){
+          this.getEntityData(entities[i], toSearch);
+        }
+      }
     },
     //Si la premiere recherche est null ou undefined on assigne
     //Queen comme valeur par défaut puisque Queen c'est bien :)
     created(){
       if((this.firstSearch == undefined) || (this.firstSearch == null)){
-        this.getArtists("Queen");
-        this.getRecordings("Queen");
+        this.launchRequests("Queen");
       //sinon on requête sur la première recherche
       } else {
-        this.getArtists(this.firstSearch);
-        this.getRecordings(this.firstSearch);
+        this.launchRequests(this.firstSearch);
       }
     },
 }

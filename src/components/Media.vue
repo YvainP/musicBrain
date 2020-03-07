@@ -22,7 +22,14 @@
       <!-- Gère le cas d'une musique -->
       <div v-else-if="typeMedia == 'recording'">
         <img src="../css/img/music.png">
-        Song : <b>{{ mediaData.title }}</b>
+        <b>{{ mediaData.title }}</b>
+        by <i>{{ mediaData["artist-credit"][0].name }}</i>
+      </div>
+      <!-- Gère le cas d'une CD, album.. -->
+      <div v-else-if="typeMedia == 'release'">
+        <img src="../css/img/album.png">
+        <b>{{mediaData.media[0].format}}
+          named {{mediaData.title}}</b>
         by <i>{{ mediaData["artist-credit"][0].name }}</i>
       </div>
     </div>
