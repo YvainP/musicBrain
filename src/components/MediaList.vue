@@ -30,7 +30,6 @@
                 class="list-group-item mb-3"></media>
             </li>
              <li v-for="release in datas.releases">
-               {{release}}
               <media :mediaData="release" typeMedia="release"
                 class="list-group-item mb-3"></media>
             </li>

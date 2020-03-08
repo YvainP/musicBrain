@@ -7,15 +7,17 @@
       On gère le cas des artistes -->
       <div v-if="typeMedia == 'artist'">
         <!-- on affiche le type d'artiste si on le connaît-->
-        <i v-if="mediaData.type">
-          <img v-if="mediaData.type=='Group'" src="../css/img/band.png">
-          <img v-if="mediaData.type=='Person'" src="../css/img/musician.png">
-          <img v-if="mediaData.type=='Character'" src="../css/img/theater.svg" width="32px" height="32px">
-          <img v-if="mediaData.type=='Orchestra'" src="../css/img/orchestra.jpg" >
-          <img v-if="mediaData.type=='Choir'" src="../css/img/choir.png"> 
-          <img v-if="mediaData.type=='Other'" src="../css/img/unknown.png"> 
-          artist type: {{ mediaData.type }} 
+        <i v-for="artist in artists">
+          <img v-if="mediaData.type==artist" :src="'../css/img/'+artist+'.png'">
+          {{artist}}
         </i>
+        <!-- <img v-if="mediaData.type=='Group'" src="../css/img/band.png">
+        <img v-if="mediaData.type=='Person'" src="../css/img/musician.png">
+        <img v-if="mediaData.type=='Character'" src="../css/img/theater.svg" width="32px" height="32px">
+        <img v-if="mediaData.type=='Orchestra'" src="../css/img/orchestra.jpg" >
+        <img v-if="mediaData.type=='Choir'" src="../css/img/choir.png"> 
+        <img v-else src="../css/img/unknown.png"> -->
+        artist type: {{ mediaData.type }} 
         {{ mediaData.name }} 
         <i v-if="mediaData.area">Country: {{ mediaData.area.name }}</i>
       </div>
@@ -28,9 +30,11 @@
       <!-- Gère le cas d'une CD, album.. -->
       <div v-else-if="typeMedia == 'release'">
         <img src="../css/img/album.png">
-        <b>{{mediaData.media[0].format}}
-          named {{mediaData.title}}</b>
+        <a v-if="mediaData.media[0].format">{{mediaData.media[0].format}}</a>
+        <a v-else>Album</a>
+        <b>{{mediaData.title}}</b>
         by <i>{{ mediaData["artist-credit"][0].name }}</i>
+        <a v-if="mediaData.date">/release date: <b>{{mediaData.date}}</b></a>
       </div>
     </div>
   </div>
@@ -47,6 +51,7 @@ export default {
     data() {
       return {
         showModal: false,
+        artists: [ 'Group', 'Person', 'Character', 'Orchestra'],
       }
     },
     methods: {
