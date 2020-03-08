@@ -9,22 +9,28 @@
         <span class="close" @click="$emit('close')">&times;</span>
         <!-- traitement et affichage des données-->
         <!-- On gère le cas des artistes -->
-        {{detailMedia}}
         <div v-if="typeMedia == 'artist'">
-            <p>Artist type : <b>{{detailMedia.type}}</b></p>
-            <!--<p>{{detailMedia.type}} name: {{detailMedia.name}}</b></p>
-            <p>Location: {{detailMedia.area.name}}</p>-->
+            {{detailMedia.name}} is a {{detailMedia.type}}
+            <p>from {{detailMedia.area.name}}.</p>
+            <p>They started to produce music in 
+            {{detailMedia["begin-area"].name}}
+            in {{detailMedia["life-span"].begin}}</p>
           </i>
         </div>
         <!-- On gère le cas d'un record -->
         <div v-else-if="typeMedia == 'recording'">
           <img src="../css/img/music.png">
           <p>record name: {{detailMedia.title}}</p>
-          <p>by {{ detailMedia["artist-credit"][0].name}}</p>
         </div>
         <!-- On gère le cas d'un release -->
         <div v-else-if="typeMedia == 'release'">
-          ee
+        </div>
+        <!-- tags d'un artiste -->
+        <div v-if="detailMedia.tags">
+          Some tags about the artist: 
+          <p v-for="tag in detailMedia.tags">
+            {{tag.name}}, 
+          </p>
         </div>
       </div>
     </div>
@@ -60,7 +66,6 @@ export default {
       let urlMediaInfos = this.baseURL + this.detailMedia.id + "?inc=url-rels";
       console.log(urlMediaInfos);
       if (this.makeAxiosRequest(urlMediaInfos).length > 0){
-        //this.urlIMG = makeAxiosRequest(urlMEdiaInfos)
         console.log(urlMediaInfos);
       }
     }
