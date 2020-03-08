@@ -11,11 +11,6 @@
         <!-- On gère le cas des artistes -->
         {{detailMedia}}
         <div v-if="typeMedia == 'artist'">
-          <!-- on affiche le type d'artiste si on le connaît
-            <img v-if="detailMedia.type=='Group'" src="../css/img/band.png">
-            <img v-if="detailMedia.type=='Person'" src="../css/img/musician.png">
-            <img v-if="detailMedia.type=='Character'" src="../css/img/theater.svg" width="32px" height="32px">
-            <img v-else src="../css/img/unknown.png">--> 
             <p>Artist type : <b>{{detailMedia.type}}</b></p>
             <!--<p>{{detailMedia.type}} name: {{detailMedia.name}}</b></p>
             <p>Location: {{detailMedia.area.name}}</p>-->
