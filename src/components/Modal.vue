@@ -20,9 +20,13 @@
         <div v-else-if="typeMedia == 'recording'">
           <modalRecording :detailRecording="detailMedia"></modalRecording>
         </div>
+        <p v-if="detailMedia.disambiguation">
+          <br>More information:<br>
+            {{detailMedia.disambiguation}}
+        </p>
         <!-- tags d'un média -->
         <div v-if="tags">
-          Some tags about the artist: 
+          Some tags about it:<br> 
           <p v-for="tag in detailMedia.tags">
             {{tag.name}},
           </p>

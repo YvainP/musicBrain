@@ -1,4 +1,4 @@
-<!-- Component modal, affiche les détails d'un média -->
+<!-- Component propre à un artiste, traite ses données -->
 <template>
   <div>
     {{artistName}} 
@@ -9,7 +9,7 @@
       from {{Area.name}}.
     </p>
     <p v-if="beginArea && beginDate">
-      They started to produce music in 
+      <br>This artist started to produce music in 
       {{beginArea.name}}
       in {{beginDate.begin}}
     </p>

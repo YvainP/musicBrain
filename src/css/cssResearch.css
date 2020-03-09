@@ -1,7 +1,7 @@
 @import "input.css"; 
 
 .myList {
-    padding: 10px;
+    padding-top: 20px;
     background-color: white;
     border-radius: 8px;
     list-style-type: none;

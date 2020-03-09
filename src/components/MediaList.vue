@@ -16,12 +16,13 @@
     <div v-else>
       <!-- on vérifie que l'on a des données à traiter -->
       <div v-if="dataBrute !== null"> 
-        <ul id="listOfMedias" class="list-group myList m-2" >
+        <ul id="listOfMedias" class="list-group myList m-4" >
           <!-- on parcoure le tableau 2D d'entités -->
           <div v-for="datas in dataBrute" class="divList">
             <!-- Pour chaque tableau d'une entité, on appelle le component
               média qui les traitera -->
             <li v-for="artist in datas.artists">
+              {{Object.keys(artist).length}}
               <media :mediaData="artist" typeMedia="artist" 
                 class="list-group-item mb-3"></media>
             </li>

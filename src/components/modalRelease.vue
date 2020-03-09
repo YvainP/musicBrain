@@ -1,25 +1,25 @@
-<!-- Modal propre à un release, traite ses données -->
+<!-- Component propre à un release, traite ses données -->
 <template>
   <div>
     <img v-if="imgURL" :src="imgURL" class="img-thumbnail imgSize">
     <img v-else src="../css/img/noimage.png" class="img-thumbnail imgSize">
-    <br>{{releaseTitle}}
+    <br><b>{{releaseTitle}}</b>
     <p v-if="artist">
-        from the artist {{artist}}
+        from the artist <i>{{artist}}</i>
     </p>
     <p v-if="releaseFormat">
-        is a {{releaseFormat}}, 
+        is a publication under the {{releaseFormat}} format. 
     </p>
     <p v-if="releaseEvents">
-        released in {{releaseEvents.date}}
+        <br>released in {{releaseEvents.date}}
     </p>
     <p v-if="releaseEvents">
-        and has been published for the first time in 
+        and published for the first time in 
         {{releaseEvents.area.name}}.
     </p>
     <p v-if="labelInfos">
         <br>This release has been associated to the label 
-        {{labelInfos.label.name}}
+        <b>{{labelInfos.label.name}}</b>.
     </p>
   </div>
 </template>
@@ -55,6 +55,9 @@ export default {
         //Affichage du spinner si le temps de chargement est long 
         .finally( () => this.loading = false);
     },
+    //Récupère le résulat d'une requete axios et tri
+    //Params: requestURL = url de la requête 
+    //Return: Renvoie l'url d'une image
     getReleaseImg(){
         let vueComponent = this;
         if(this.releaseID){
