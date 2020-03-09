@@ -7,29 +7,24 @@
       <div class="modal-content">
         <!-- utilisé pour fermer le modal -->
         <span class="close" @click="$emit('close')">&times;</span>
-        <!-- traitement et affichage des données-->
-        <!-- On gère le cas des artistes -->
+        <!-- On appelle le component modal pour chaque média qui mettra en forme ses données -->
+        <!-- Cas des artistes -->
         <div v-if="typeMedia == 'artist'">
-            {{detailMedia.name}} is a {{detailMedia.type}}
-            <p>from {{detailMedia.area.name}}.</p>
-            <p>They started to produce music in 
-            {{detailMedia["begin-area"].name}}
-            in {{detailMedia["life-span"].begin}}</p>
-          </i>
+          <modalArtist :detailArtist="detailMedia"></modalArtist>
         </div>
-        <!-- On gère le cas d'un record -->
-        <div v-else-if="typeMedia == 'recording'">
-          <img src="../css/img/music.png">
-          <p>record name: {{detailMedia.title}}</p>
-        </div>
-        <!-- On gère le cas d'un release -->
+        <!-- Cas d'un record -->
         <div v-else-if="typeMedia == 'release'">
+          <modalRelease :detailRelease="detailMedia"></modalRelease>
         </div>
-        <!-- tags d'un artiste -->
-        <div v-if="detailMedia.tags">
+        <!-- Cas d'un release -->
+        <div v-else-if="typeMedia == 'recording'">
+          <modalRecording :detailRecording="detailMedia"></modalRecording>
+        </div>
+        <!-- tags d'un média -->
+        <div v-if="tags">
           Some tags about the artist: 
           <p v-for="tag in detailMedia.tags">
-            {{tag.name}}, 
+            {{tag.name}},
           </p>
         </div>
       </div>
@@ -40,13 +35,18 @@
 
 import styles from '../css/modal.css';
 import axios from 'axios';
+import modalArtist from "./modalArtist.vue";
+import modalRelease from "./modalRelease.vue";
+import modalRecording from "./modalRecording.vue";
 
 export default {
   name: 'modal',
+  components: {modalArtist, modalRelease, modalRecording},
   props: ['detailMedia', 'typeMedia'],
   data() {
     return{
       baseURL: "http://musicbrainz.org/ws/2/release/",
+      tags: this.detailMedia.tags,
     }
   },
   methods: {
@@ -61,17 +61,6 @@ export default {
       //Affichage du spinner si le temps de chargement est long 
         .finally( () => this.loading = false); 
     },
-
-    getMediaImg(){
-      let urlMediaInfos = this.baseURL + this.detailMedia.id + "?inc=url-rels";
-      console.log(urlMediaInfos);
-      if (this.makeAxiosRequest(urlMediaInfos).length > 0){
-        console.log(urlMediaInfos);
-      }
-    }
   },
-  created() {
-   //this.getMediaImg(); 
-  }
 }
 </script>
