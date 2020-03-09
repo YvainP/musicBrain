@@ -34,7 +34,6 @@
 <script>
 
 import styles from '../css/modal.css';
-import axios from 'axios';
 import modalArtist from "./modalArtist.vue";
 import modalRelease from "./modalRelease.vue";
 import modalRecording from "./modalRecording.vue";
@@ -45,22 +44,8 @@ export default {
   props: ['detailMedia', 'typeMedia'],
   data() {
     return{
-      baseURL: "http://musicbrainz.org/ws/2/release/",
       tags: this.detailMedia.tags,
     }
-  },
-  methods: {
-    //Envoie une requête axios get 
-    //Params: mediaURL = url de la requête 
-    //Return: Renvoie les résultats de la requête 
-    makeAxiosRequest(mediaURL){ 
-      return axios.get(mediaURL) 
-        .then(response => {return response.data;}) 
-      //catch des erreurs 
-        .catch(error => {this.error = error; }) 
-      //Affichage du spinner si le temps de chargement est long 
-        .finally( () => this.loading = false); 
-    },
   },
 }
 </script>
