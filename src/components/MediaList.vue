@@ -2,7 +2,7 @@
 <template>
   <div class=""> 
     <!-- barre de recherche --> 
-    <input class="mainInput" v-model="keywordsEntered" placeholder="You can search anything here :)" 
+    <input v-model="keywordsEntered" placeholder="You can search anything here :)" 
       @keyup="searchTimeOut(keywordsEntered)" type="text" />
     <span class="bar"></span>
     <!-- S'il y a des erreurs, on envoie leurs valeurs au component -->
@@ -14,16 +14,23 @@
       <unwanted :typeUnwanted="'loading'"></unwanted>
     </div>
     <div v-else>
+      <!-- recherche détaillé --> 
+      <div class="detailSearch">
+        <h4> Detailed Research </h4>
+        <input class="smallInput" placeholder="Artist" type="text"/>
+        <input class="smallInput" placeholder="Band" type="text"/>
+        <input class="smallInput" placeholder="Album" type="text"/>
+        <button class="btn btn-dark">Let's search it!</button>
+      </div>
       <!-- on vérifie que l'on a des données à traiter -->
-      <div v-if="dataBrute !== null"> 
-        <ul id="listOfMedias" class="list-group myList m-4" >
+      <div v-if="dataBrute !== null">
+        <ul id="listOfMedias" class="list-group myList m-4">
           <!-- on parcoure le tableau 2D d'entités -->
           <div v-for="datas in dataBrute" class="divList">
-            <!-- Pour chaque tableau d'une entité, on appelle le component
-              média qui les traitera -->
+            <!-- Pour chaque tableau d'une entité, on appelle le component média qui les traitera -->
             <li v-for="artist in datas.artists">
-              {{Object.keys(artist).length}}
-              <media :mediaData="artist" typeMedia="artist" 
+              <!-- on affiche l'artiste si son contenu est suffisamment grand pour être pertinent -->
+              <media v-if="Object.keys(artist).length > 7" :mediaData="artist" typeMedia="artist" 
                 class="list-group-item mb-3"></media>
             </li>
             <li v-for="record in datas.recordings">

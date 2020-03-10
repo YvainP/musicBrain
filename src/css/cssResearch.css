@@ -5,13 +5,14 @@
     background-color: white;
     border-radius: 8px;
     list-style-type: none;
-    width: 80%;
+    width: 75%;
 }
 
 .divList > li {
   width: 80%;
   float: center;
   margin: auto;
+  overflow: hidden;
 }
 
 .mainTitle {
@@ -19,4 +20,31 @@
   font-weight: bold;
   margin-bottom: 50px;
   text-align: center;
+}
+
+.detailSearch {
+  float: right;
+}
+
+.smallInput {
+  width:80%;
+  margin-top: 20px;
+  margin-left: 0;
+}
+
+.detailSearch > h4 {
+  font-weight: bold;
+}
+
+.detailSearch > button {
+  margin-top: 10px;
+}
+
+
+/* on cache la recherche détaillé si l'écran est trop petit,
+cela est plus agréable */
+@media screen and (max-width: 1000px) {
+  .detailSearch  {
+    display: none;
+  }
 }
