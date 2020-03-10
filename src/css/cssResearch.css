@@ -5,7 +5,9 @@
     background-color: white;
     border-radius: 8px;
     list-style-type: none;
-    width: 75%;
+    width: 70%;
+    margin-left: 150px;
+    margin-top: 40px;
 }
 
 .divList > li {
@@ -46,5 +48,15 @@ cela est plus agréable */
 @media screen and (max-width: 1000px) {
   .detailSearch  {
     display: none;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .myList {
+    width: 65%;
+  }
+
+  .detailSearch  {
+    width: 20%;
   }
 }
