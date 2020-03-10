@@ -17,10 +17,10 @@
       <!-- recherche détaillé --> 
       <div class="detailSearch">
         <h4> Detailed Research </h4>
-        <input class="smallInput" placeholder="Artist" type="text"/>
-        <input class="smallInput" placeholder="Band" type="text"/>
-        <input class="smallInput" placeholder="Album" type="text"/>
-        <button class="btn btn-dark">Let's search it!</button>
+        <input class="smallInput" v-model="artistWanted" placeholder="Artist" type="text"/>
+        <input class="smallInput" v-model="releaseWanted" placeholder="Release" type="text"/>
+        <input class="smallInput" v-model="recordWanted" placeholder="Record" type="text"/>
+        <button class="btn btn-dark" @click="getDetailedFields">Let's search it!</button>
       </div>
       <!-- on vérifie que l'on a des données à traiter -->
       <div v-if="dataBrute !== null">
@@ -70,10 +70,33 @@ export default {
           keywordsEntered: null,
           baseURL: "http://musicbrainz.org/ws/2",
           options:"&fmt=json&limit=5",
+          releaseWanted: null,
+          artistWanted: null,
+          recordWanted: null,
         }
 
     },
     methods: {
+      //Rcherche par entité voulue
+      //Params: none
+      //Return: Affiche les résultats des requêtes
+      getDetailedFields(){
+        if((this.artistWanted)||(this.releaseWanted)||(this.recordWanted)){
+          //On vide la liste au préalable
+          let root = document.getElementById("listOfMedias");
+          while(root.firstChild ){root.removeChild(root.firstChild );}
+        }
+        if(this.artistWanted){
+          this.getEntityData('artist', this.artistWanted);
+          this.artistWanted = null;
+        } if(this.releaseWanted){
+          this.getEntityData('release', this.releaseWanted);
+          this.releaseWanted = null;
+        } if (this.recordWanted){
+          this.getEntityData('recording', this.recordWanted);
+          this.recordWanted = null;
+        }
+      },
       //Envoie une requête axios get
       //Params: mediaURL = url de la requête 
       //Return: Renvoie les résultats de la requête 
