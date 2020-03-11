@@ -21,12 +21,12 @@
           <modalRecording :detailRecording="detailMedia"></modalRecording>
         </div>
         <p v-if="detailMedia.disambiguation">
-          <br>More information:<br>
+          <br><u>More information:</u><br>
             {{detailMedia.disambiguation}}
         </p>
         <!-- tags d'un média -->
         <div v-if="tags">
-          Some tags about it:<br> 
+          <u class="mt-1">Some tags about it:</u><br> 
           <p v-for="tag in detailMedia.tags">
             {{tag.name}},
           </p>
