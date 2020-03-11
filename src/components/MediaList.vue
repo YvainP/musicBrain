@@ -160,14 +160,11 @@ export default {
         }
       }
     },
-    //Si la liste est vide on recherche Queen par défaut
-    //avec un timer si l'utilisateur spamme f5
+    //Si la premiere recherche est null ou undefined on assigne
+    //Queen comme valeur par défaut puisque Queen c'est bien :)
     created(){
-      let root = document.getElementById("listOfMedias");
-      if((root == null)){
-        setTimeout(() => {
-          this.launchRequests("Queen")
-        }, 400);
+      if((this.firstSearch == undefined) || (this.firstSearch == null)){
+        this.launchRequests("Queen");
       //sinon on requête sur la première recherche
       } else {
         this.launchRequests(this.firstSearch);
