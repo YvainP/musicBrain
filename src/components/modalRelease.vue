@@ -8,14 +8,14 @@
         from the artist <i>{{artist}}</i>
     </p>
     <p v-if="releaseFormat">
-        is a publication under the {{releaseFormat}} format. 
+        is a publication under the <b>{{releaseFormat}}</b> format. 
     </p>
     <p v-if="releaseEvents">
-        <br>released in {{releaseEvents.date}}
+        <br>released in <b>{{releaseEvents.date}}</b>
     </p>
     <p v-if="releaseEvents">
         and published for the first time in 
-        {{releaseEvents.area.name}}.
+        <b>{{releaseEvents.area.name}}</b>.
     </p>
     <p v-if="labelInfos">
         <br>This release has been associated to the label 
