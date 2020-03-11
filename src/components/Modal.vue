@@ -6,7 +6,7 @@
       <!-- Modal content -->
       <div class="modal-content">
         <!-- utilisé pour fermer le modal -->
-        <span class="close" @click="$emit('close')">&times;</span>
+        <span class="close my-2" @click="$emit('close')">&times; close</span>
         <!-- On appelle le component modal pour chaque média qui mettra en forme ses données -->
         <!-- Cas des artistes -->
         <div v-if="typeMedia == 'artist'">
