@@ -15,7 +15,7 @@
       <!-- On lie la page de recherche au "bouton" en lui passant 
       comme paramètres ce que l'user a tapé dans la barre -->
       <router-link :to="{ name: 'research', params: { firstSearch: inputWords } }">
-        <button class="btn btn-dark">
+        <button class="btn btn-dark mt-4">
           Let's search it!
         </button>
       </router-link>
@@ -34,7 +34,7 @@ export default {
     }
   },
   created() {
-    this.$refs.search.$el.focus();
+    //this.$refs.search.$el.focus();
   }
 }
 </script>

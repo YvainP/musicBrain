@@ -48,6 +48,7 @@ cela est plus agréable */
 @media screen and (max-width: 1000px) {
   .detailSearch  {
     display: none;
+    width: 80%;
   }
 }
 
