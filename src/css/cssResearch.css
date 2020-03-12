@@ -25,7 +25,8 @@
 }
 
 .detailSearch {
-  float: right;
+  float: left;
+  margin-left: 30px;
 }
 
 .smallInput {
