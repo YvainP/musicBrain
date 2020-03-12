@@ -18,7 +18,7 @@
   margin: auto;
   padding: 20px;
   border: 2px solid black;
-  width: 50%;
+  width: 45%;
   font-size: 20px;
 }
 
@@ -93,4 +93,5 @@
 .imgSize {
   max-width: 30%;
   margin: auto;
+  float: center;
 }

@@ -1,7 +1,7 @@
 <!-- Component propre à un artiste, traite ses données -->
 <template>
   <div>
-    {{artistName}} 
+    <b>{{artistName}}</b>
     <p v-if="artistType">
       is a 
       <b :title="infoArtist" class="text-info">{{artistType}}</b>
