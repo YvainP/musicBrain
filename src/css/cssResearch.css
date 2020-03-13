@@ -2,23 +2,25 @@
 @import url(https://fonts.googleapis.com/css?family=Bangers);
 
 .myList {
-    padding-top: 20px;
-    background-color: white;
-    border-radius: 8px;
-    list-style-type: none;
-    width: 70%;
-    margin-left: 150px;
-    margin-top: 40px;
-    -webkit-box-shadow: 40px -27px 37px -15px rgba(0,0,0,1);
-    -moz-box-shadow: 40px -27px 37px -15px rgba(0,0,0,1);
-    box-shadow: 40px -27px 37px -15px rgba(0,0,0,1);
+  padding-top: 20px;
+  background-color: white;
+  border-radius: 8px;
+  list-style-type: none;
+  width: 70%;
+  margin-left: 320px;
+  margin-top: 40px;
+  -webkit-box-shadow: 40px -27px 37px -15px rgba(0,0,0,1);
+  -moz-box-shadow: 40px -27px 37px -15px rgba(0,0,0,1);
+  box-shadow: 40px -27px 37px -15px rgba(0,0,0,1);
 }
 
 .divList > li {
   width: 70%;
   margin: auto;
   overflow: hidden;
-  font-size: 20px;
+  font-size: 23px;
+  margin-top: 10px;
+  border-radius: 5px;
 }
 
 .mainTitle {
@@ -34,7 +36,7 @@
 }
 
 .smallInput {
-  width:80%;
+  width:100%;
   margin-top: 20px;
   margin-left: 0;
 }

@@ -17,10 +17,10 @@
       <!-- recherche détaillé --> 
       <div class="detailSearch">
         <h4> Detailed Research </h4>
-        <input class="smallInput" v-model="artistWanted" placeholder="Artist" type="text"/>
-        <input class="smallInput" v-model="releaseWanted" placeholder="Release" type="text"/>
-        <input class="smallInput" v-model="recordWanted" placeholder="Record" type="text"/>
-        <button class="btn btn-dark" @click="getDetailedFields">Let's search it!</button>
+        <input class="smallInput" v-model="artistWanted" placeholder="Type your artist" type="text"/>
+        <input class="smallInput" v-model="releaseWanted" placeholder="Field for an album/CD" type="text"/>
+        <input class="smallInput" v-model="recordWanted" placeholder="Enter a record name" type="text"/>
+        <button class="btn btn-primary" @click="getDetailedFields">Let's search it!</button>
       </div>
       <!-- on vérifie que l'on a des données à traiter -->
       <div v-if="dataBrute !== null">
@@ -29,7 +29,7 @@
           <div v-for="datas in dataBrute" class="divList">
             <!-- Pour chaque tableau d'une entité, on appelle le component média qui les traitera -->
             <li v-for="artist in datas.artists">
-              <!-- on affiche l'artiste si son contenu est suffisamment grand pour être pertinent -->
+              <!-- on affiche l'artiste si il y a suffisamment de données pour être pertinent -->
               <media v-if="Object.keys(artist).length > 7" :mediaData="artist" typeMedia="artist" 
                 class="list-group-item mb-3"></media>
             </li>

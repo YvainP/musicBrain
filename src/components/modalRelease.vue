@@ -1,9 +1,9 @@
 <!-- Component propre à un release, traite ses données -->
 <template>
   <div>
-    <img v-if="imgURL" :src="imgURL" class="img-thumbnail imgSize">
-    <img v-else src="../css/img/noimage.png" class="img-thumbnail imgSize">
-    <br><b>{{releaseTitle}}</b>
+    <img v-if="imgURL" :src="imgURL" class="img-thumbnail imgSize mt-3">
+    <img v-else src="../css/img/noimage.png" class="img-thumbnail imgSize mt-3">
+    <br><br><b>{{releaseTitle}}</b>
     <p v-if="artist">
         from the artist <i>{{artist}}</i>
     </p>
@@ -11,7 +11,7 @@
         is a publication under the {{releaseFormat}} format. 
     </p>
     <p v-if="releaseEvents">
-        <br>released in {{releaseEvents.date}}
+        <br>It has been released in {{releaseEvents.date}}
     </p>
     <p v-if="releaseEvents">
         and published for the first time in 

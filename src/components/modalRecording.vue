@@ -6,7 +6,7 @@
       by the artist <i>{{artistCredit[0].name}}</i>
     </p>
     <div v-if="releaseInfos">
-      This track is included in the album
+      <br>This track is included in the album
       <b>{{releaseInfos[0].title}}</b>
       <p v-if="releaseInfos[0].date">
         released in <b>{{releaseInfos[0].date}}</b>

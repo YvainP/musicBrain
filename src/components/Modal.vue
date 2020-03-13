@@ -21,8 +21,8 @@
           <modalRecording :detailRecording="detailMedia"></modalRecording>
         </div>
         <p v-if="detailMedia.disambiguation">
-          <br><u>More information:</u><br>
-            {{detailMedia.disambiguation}}
+          <br><u>More information and quote:</u><br>
+            "{{detailMedia.disambiguation}}", 
         </p>
         <!-- tags d'un média -->
         <div v-if="tags">

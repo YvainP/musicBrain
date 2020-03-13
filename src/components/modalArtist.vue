@@ -9,11 +9,11 @@
     <p v-if="Area">
       from {{Area.name}}.
     </p>
-    <p v-if="beginArea && beginDate">
+    <div v-if="beginArea && beginDate">
       <br>This artist started to produce music in 
-      {{beginArea.name}}
-      in {{beginDate.begin}}
-    </p>
+      <b v-if="beginArea.name">{{beginArea.name}}</b>
+      <b v-if="beginDate.begin">{{beginDate.begin}}</b>
+    </div>
 
   </div>
 </template>
