@@ -57,9 +57,15 @@ cela est plus agréable */
     display: none;
     width: 80%;
   }
+  .myList {
+    width: 90%;
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
 
-@media screen and (max-width: 1400px) {
+@media screen (min-width: 1000px) and (max-width: 1400px) {
   .myList {
     width: 65%;
   }

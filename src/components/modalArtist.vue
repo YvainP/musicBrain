@@ -14,7 +14,6 @@
       <b v-if="beginArea.name">{{beginArea.name}}</b>
       <b v-if="beginDate.begin">{{beginDate.begin}}</b>
     </div>
-
   </div>
 </template>
 <script>
@@ -39,7 +38,7 @@ export default {
       else if(this.artistType == 'Group')
         return "This is a group of musicians";
       else if(this.artistType == 'Character')
-        return "It is fictionnal artist, created for a music performance, like Robin Sparkles"  
+        return "It's a fictionnal artist, created for a music performance, like Robin Sparkles"  
     }
   }
 }

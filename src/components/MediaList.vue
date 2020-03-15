@@ -29,9 +29,11 @@
           <div v-for="datas in dataBrute" class="divList">
             <!-- Pour chaque tableau d'une entité, on appelle le component média qui les traitera -->
             <li v-for="artist in datas.artists">
-              <!-- on affiche l'artiste si il y a suffisamment de données pour être pertinent -->
-              <media v-if="Object.keys(artist).length > 7" :mediaData="artist" typeMedia="artist" 
-                class="list-group-item mb-3"></media>
+              <div v-if="Object.keys(artist).length > 7"> 
+                <!-- on affiche l'artiste si il y a suffisamment de données pour être pertinent -->
+                <media :mediaData="artist" typeMedia="artist" 
+                  class="list-group-item mb-3"></media>
+              </div>
             </li>
             <li v-for="record in datas.recordings">
               <media :mediaData="record" typeMedia="recording"
@@ -77,7 +79,7 @@ export default {
 
     },
     methods: {
-      //Rcherche par entité voulue
+      //Recherche de données popur l'entité voulue
       //Params: none
       //Return: Affiche les résultats des requêtes
       getDetailedFields(){

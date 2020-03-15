@@ -1,25 +1,25 @@
 <!-- Component propre à un release, traite ses données -->
 <template>
   <div>
-    <img v-if="imgURL" :src="imgURL" class="img-thumbnail imgSize mt-3">
-    <img v-else src="../css/img/noimage.png" class="img-thumbnail imgSize mt-3">
+    <img v-if="imgURL" :src="imgURL" class="imgSize mt-3">
+    <img v-else src="../css/img/noimage.png" class="imgSize mt-3">
     <br><br><b>{{releaseTitle}}</b>
     <p v-if="artist">
-        from the artist <i>{{artist}}</i>
+        from the artist <i>{{artist[0].name}}</i>
     </p>
     <p v-if="releaseFormat">
-        is a publication under the {{releaseFormat}} format. 
+        is a publication under the {{releaseFormat[0].format}} format. 
     </p>
-    <p v-if="releaseEvents">
+    <p v-if="releaseEvents.date">
         <br>It has been released in {{releaseEvents.date}}
     </p>
     <p v-if="releaseEvents">
-        and published for the first time in 
-        {{releaseEvents.area.name}}.
+        This album was published for the first time in 
+        <b>{{releaseEvents[0].area.name}}.</b>
     </p>
     <p v-if="labelInfos">
         <br>This release has been associated to the label 
-        <b>{{labelInfos.label.name}}</b>.
+        <b>{{labelInfos[0].label.name}}</b>.
     </p>
   </div>
 </template>
@@ -33,10 +33,10 @@ export default {
   data() {
     return{
         releaseTitle: this.detailRelease.title,
-        artist: this.detailRelease["artist-credit"][0].name,
-        releaseEvents: this.detailRelease["release-events"][0],
-        labelInfos: this.detailRelease["label-info"][0],
-        releaseFormat: this.detailRelease.media[0].format,
+        artist: this.detailRelease["artist-credit"],
+        releaseEvents: this.detailRelease["release-events"],
+        labelInfos: this.detailRelease["label-info"],
+        releaseFormat: this.detailRelease.media,
         releaseID: this.detailRelease.id,
         baseURL: "http://coverartarchive.org/release/",
         picturesList: [],
