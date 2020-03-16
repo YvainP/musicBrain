@@ -15,7 +15,7 @@
           </p>
           <strong>{{mediaData.name}}</strong>
           <i v-if="mediaData.area">from {{ mediaData.area.name }}</i>
-          // <small>{{mediaData.disambiguation}}</small>
+          {{mediaData.disambiguation}}
         </div>
         <!-- Gère le cas d'une musique -->
         <div v-else-if="typeMedia == 'recording'">
