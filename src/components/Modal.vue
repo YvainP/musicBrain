@@ -7,19 +7,25 @@
       <div class="modal-content">
         <!-- utilisé pour fermer le modal -->
         <span class="close my-2" @click="$emit('close')">&times; close</span>
-        <!-- On appelle le component modal pour chaque média qui mettra en forme ses données -->
+        <!-- On appelle le component modal spécifique à chaque 
+          média qui mettra en forme ses données -->
+
         <!-- Cas des artistes -->
         <div v-if="typeMedia == 'artist'">
           <modalArtist :detailArtist="detailMedia"></modalArtist>
         </div>
+
         <!-- Cas d'un record -->
         <div v-else-if="typeMedia == 'release'">
           <modalRelease :detailRelease="detailMedia"></modalRelease>
         </div>
+
         <!-- Cas d'un release -->
         <div v-else-if="typeMedia == 'recording'">
           <modalRecording :detailRecording="detailMedia"></modalRecording>
         </div>
+
+        <!-- QUelques données propres à tous les médias -->
         <p v-if="detailMedia.disambiguation">
           <br><u>More information and quote:</u><br>
             "{{detailMedia.disambiguation}}", 

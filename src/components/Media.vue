@@ -1,8 +1,9 @@
-<!-- component média, utilisé pour afficher les infos d'un média -->
+<!-- component média, utilisé pour afficher le minimum d'infos d'un média -->
 <template>
   <div class="media">
     <modal v-if="showModal" v-on:close="closeModal" :detailMedia="mediaData" :typeMedia="typeMedia"></modal>
     <div @click="showModal=true">
+
       <!-- En fonction du média on récupère les champs intéressants
         On gère le cas des artistes -->
         <div v-if="typeMedia == 'artist'">
@@ -17,12 +18,14 @@
           <i v-if="mediaData.area">from {{ mediaData.area.name }}</i>
           // <small>{{mediaData.disambiguation}}</small>
         </div>
+
         <!-- Gère le cas d'une musique -->
         <div v-else-if="typeMedia == 'recording'">
           <img src="../css/img/music.png">
           <b>{{ mediaData.title }}</b>
           by <i>{{ mediaData["artist-credit"][0].name }}</i>
         </div>
+
         <!-- Gère le cas d'une CD, album.. -->
         <div v-else-if="typeMedia == 'release'">
           <img src="../css/img/album.png">

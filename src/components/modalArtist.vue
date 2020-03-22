@@ -31,7 +31,8 @@ export default {
     }
   },
   computed: {
-    //Bulle d'infos selon le type d'artiste
+    //Informations supplémentaires selon le type d'artiste
+    //lors du survolage du type
     infoArtist: function(){
       if(this.artistType == 'Person')
         return "This can be a singer, DJ, composer, producer, ...etc"

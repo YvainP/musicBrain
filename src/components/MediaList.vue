@@ -1,20 +1,23 @@
 <!-- Liste des médias -->
 <template>
-  <div class=""> 
+  <div> 
     <!-- barre de recherche --> 
     <input v-model="keywordsEntered" placeholder="You can search anything here :)" 
       @keyup="searchTimeOut(keywordsEntered)" type="text" />
     <span class="bar"></span>
+
     <!-- S'il y a des erreurs, on envoie leurs valeurs au component -->
     <div v-if="error !== null">   
       <unwanted :typeUnwanted="error"></unwanted>
     </div>
+
     <!-- S'il les données sont longues à charger -->
     <div v-else-if="loading">       
       <unwanted :typeUnwanted="'loading'"></unwanted>
     </div>
     <div v-else>
-      <!-- recherche détaillé --> 
+
+      <!-- Partie recherche détaillé --> 
       <div class="detailSearch">
         <h4> Detailed Research </h4>
         <input class="smallInput" v-model="artistWanted" placeholder="Type your artist" type="text"/>
@@ -22,23 +25,32 @@
         <input class="smallInput" v-model="recordWanted" placeholder="Enter a record name" type="text"/>
         <button class="btn btn-primary" @click="getDetailedFields">Let's search it!</button>
       </div>
-      <!-- on vérifie que l'on a des données à traiter -->
+
+      <!-- Si on récupère des données, on les traitent -->
       <div v-if="dataBrute !== null">
         <ul id="listOfMedias" class="list-group myList ">
-          <!-- on parcoure le tableau 2D d'entités -->
+          <!-- Les données sont stockées dans un tableau 2D d'entités de médias -->
           <div v-for="datas in dataBrute" class="divList">
-            <!-- Pour chaque tableau d'une entité, on appelle le component média qui les traitera -->
+
+            <!-- Pour chaque tableau d'une entité, on appelle le component média 
+              qui traitera chaque élément de celui-ci -->
             <li v-for="artist in datas.artists">
+              <!-- on affiche l'artiste si il y a suffisamment de données pour être pertinent -->
               <div v-if="Object.keys(artist).length > 7"> 
-                <!-- on affiche l'artiste si il y a suffisamment de données pour être pertinent -->
                 <media :mediaData="artist" typeMedia="artist" 
-                  class="list-group-item mb-3"></media>
+                  class="list-group-item mb-3">
+                </media>
               </div>
             </li>
+
+            <!-- Traitement entité record -->
             <li v-for="record in datas.recordings">
               <media :mediaData="record" typeMedia="recording"
-                class="list-group-item mb-3"></media>
+                class="list-group-item mb-3">
+              </media>
             </li>
+
+            <!-- Traitement entité release -->
              <li v-for="release in datas.releases">
               <media :mediaData="release" typeMedia="release"
                 class="list-group-item mb-3"></media>
@@ -46,6 +58,8 @@
           </div>
         </ul>
       </div>
+
+      <!-- dernier cas -->
       <div v-else>
         Sorry but your research didn't return anything :(
       </div>
@@ -79,7 +93,7 @@ export default {
 
     },
     methods: {
-      //Recherche de données popur l'entité voulue
+      //Effectue une recherche détaillée selon les champs remplis
       //Params: none
       //Return: Affiche les résultats des requêtes
       getDetailedFields(){
@@ -88,13 +102,18 @@ export default {
           let root = document.getElementById("listOfMedias");
           while(root.firstChild ){root.removeChild(root.firstChild );}
         }
+        //Rechercher sur un artiste
         if(this.artistWanted){
           this.getEntityData('artist', this.artistWanted);
           this.artistWanted = null;
-        } if(this.releaseWanted){
+        } 
+        //un release
+        if(this.releaseWanted){
           this.getEntityData('release', this.releaseWanted);
           this.releaseWanted = null;
-        } if (this.recordWanted){
+        }
+        //ou un record
+        if (this.recordWanted){
           this.getEntityData('recording', this.recordWanted);
           this.recordWanted = null;
         }
@@ -138,7 +157,7 @@ export default {
             this.launchRequests(toSearch);
           }
       },
-      //Capte le moment ou l'utilisateur a probablement finis d'écrire
+      //Capte le moment où l'utilisateur a probablement finis d'écrire
       //permet d'éviter trop de requêtes vers l'api
       //Params: typedWords = recherche que l'on transfert
       //Return: none
