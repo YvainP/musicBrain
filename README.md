@@ -1,4 +1,4 @@
-# musicBrain
+# App Shiku par PRAGA Yvain
 
 Pour lancer le projet:
 "npm install" pour installer les modules
